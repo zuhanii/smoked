@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body bgcolor="Grey">
+  <body>
     
     
     
@@ -61,7 +61,8 @@
       </div>
     </section>
     <section id="food">
-      <h2>Foods We Serve</h2>
+      <h2>FOODS WE SERVE</h2>
+      <br>
       <div class="food-container container">
         <div class="food-type fruite">
           <div class="img-container">
@@ -109,7 +110,7 @@
       </div>
     </section>
     <section id="food-menu">
-      <h2 class="food-menu-heading">Food Menu</h2>
+      <h2 class="food-menu-heading">FOOD MENU</h2>
       <div class="food-menu-container container">
         <div class="food-menu-item">
           <div class="food-img">
@@ -298,7 +299,7 @@
             {
               scrollTop: $(hash).offset().top,
             },
-            100, // Smooth scroll speed (milliseconds)
+            10, // Smooth scroll speed (milliseconds)
             function () {
               // Add hash (#) to URL when done scrolling (default click behavior)
               window.location.hash = hash;
@@ -307,6 +308,38 @@
         }
       });
   
+      $(document).ready(function () {
+    // Function to check if element is in viewport
+    function isInViewport(element) {
+        var rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Function to trigger animation for about us section
+    function animateAboutSection() {
+        var aboutSection = document.getElementById('about');
+        if (isInViewport(aboutSection)) {
+            $('.about-img').addClass('about-img-animation');
+            $('.about-text').addClass('about-text-animation');
+            // Remove the scroll event listener to avoid triggering the animation multiple times
+            $(window).off('scroll', animateAboutSection);
+        }
+    }
+
+    // Trigger the animation on page load
+    animateAboutSection();
+
+    // Add a scroll event listener to trigger the animation when scrolling
+    $(window).on('scroll', animateAboutSection);
+
+    // Other code...
+});
+
       // Hamburger menu toggle
       $(".hamburger-lines").on("click", function () {
         $(".menu-items").toggleClass("active");
